@@ -1,7 +1,8 @@
-import torch
-from torchvision import transforms
-import torchvision
 import os
+
+import torch
+import torchvision
+from torchvision import transforms
 
 # Path to a directory with image dataset and subfolders for training, validation and final testing
 DATA_PATH = r"./mlops/data"
@@ -19,31 +20,42 @@ BATCH_SIZE = 256
 
 
 def data_transformer():
-    return transforms.Compose([
-        transforms.Resize((SIZE_H, SIZE_W)),  # scaling images to fixed size
-        transforms.ToTensor(),  # converting to tensors
-        transforms.Normalize(image_mean, image_std)  # normalize image data per-channel
-    ])
+    return transforms.Compose(
+        [
+            transforms.Resize((SIZE_H, SIZE_W)),  # scaling images to fixed size
+            transforms.ToTensor(),  # converting to tensors
+            transforms.Normalize(
+                image_mean, image_std
+            ),  # normalize image data per-channel
+        ]
+    )
 
 
 def train_data():
     transformer = data_transformer()
-    train_dataset = torchvision.datasets.ImageFolder(os.path.join(DATA_PATH, 'train_11k'), transform=transformer)
-    return torch.utils.data.DataLoader(train_dataset,
-                                                  batch_size=BATCH_SIZE,
-                                                  shuffle=True,
-                                                  num_workers=0)
+    train_dataset = torchvision.datasets.ImageFolder(
+        os.path.join(DATA_PATH, "train_11k"), transform=transformer
+    )
+    return torch.utils.data.DataLoader(
+        train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=0
+    )
+
 
 def valid_data():
     transformer = data_transformer()
-    val_dataset = torchvision.datasets.ImageFolder(os.path.join(DATA_PATH, 'val'), transform=transformer)
-    return torch.utils.data.DataLoader(val_dataset,
-                                                batch_size=BATCH_SIZE,
-                                                num_workers=0)
+    val_dataset = torchvision.datasets.ImageFolder(
+        os.path.join(DATA_PATH, "val"), transform=transformer
+    )
+    return torch.utils.data.DataLoader(
+        val_dataset, batch_size=BATCH_SIZE, num_workers=0
+    )
+
 
 def test_data():
     transformer = data_transformer()
-    test_dataset = torchvision.datasets.ImageFolder(os.path.join(DATA_PATH, 'test_labeled'), transform=transformer)
-    return torch.utils.data.DataLoader(test_dataset,
-                                                 batch_size=BATCH_SIZE,
-                                                 num_workers=0)
+    test_dataset = torchvision.datasets.ImageFolder(
+        os.path.join(DATA_PATH, "test_labeled"), transform=transformer
+    )
+    return torch.utils.data.DataLoader(
+        test_dataset, batch_size=BATCH_SIZE, num_workers=0
+    )

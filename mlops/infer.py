@@ -1,14 +1,13 @@
 import torch
-import numpy as np
+from src.data_prep import test_data, valid_data
 from src.runner import CNNRunner
-from src.data_prep import valid_data, test_data
 
-ckpt_name_cnn = './mlops/bin/model_cnn.ckpt'
+ckpt_name_cnn = "./mlops/bin/model_cnn.ckpt"
 
 
 def main():
     best_model_cnn = None
-    with open(ckpt_name_cnn, 'rb') as f:
+    with open(ckpt_name_cnn, "rb") as f:
         best_model_cnn = torch.load(f)
 
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
@@ -18,13 +17,13 @@ def main():
     val_batch_gen = valid_data()
     test_batch_gen = test_data()
 
-    val_stats = runner_cnn.validate(val_batch_gen, phase_name='val')
-    test_stats = runner_cnn.validate(test_batch_gen, phase_name='test')
+    val_stats = runner_cnn.validate(val_batch_gen, phase_name="val")
+    test_stats = runner_cnn.validate(test_batch_gen, phase_name="test")
 
-    if val_stats['f1'] > 0.75 and test_stats['f1'] > 0.75:
-        print('You have achieved the baseline for this task.')
+    if val_stats["f1"] > 0.75 and test_stats["f1"] > 0.75:
+        print("You have achieved the baseline for this task.")
     else:
-        print('Train for some more time.')
+        print("Train for some more time.")
 
 
 if __name__ == "__main__":
