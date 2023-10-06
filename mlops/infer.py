@@ -25,6 +25,8 @@ def main():
     else:
         print("Train for some more time.")
 
+    runner_cnn.predict(test_batch_gen)
+
 
 if __name__ == "__main__":
     main()

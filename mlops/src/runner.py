@@ -117,7 +117,7 @@ class Runner:
     def _reset_events(self, event_name):
         self.events[event_name] = defaultdict(list)
 
-    def forward(self, img_batch):
+    def forward(self, img_batch, train_phase=True):
         logits = self.model(img_batch)
         output = {
             "logits": logits,
@@ -146,6 +146,18 @@ class CNNRunner(Runner):
         self.events[self._phase_name]["labels"].extend(labels)
 
         return loss
+
+    def predict(self, loader):
+        phase_name = "test"
+        self._phase_name = phase_name
+        self._reset_events(phase_name)
+        self._run_epoch(loader, train_phase=False, output_log=False)
+        logit_batch = self.output["logits"]
+        predicts = torch.tensor([])
+        pred = torch.softmax(logit_batch, dim=1)
+        predicts = torch.cat([predicts, pred], axis=0)
+        predicts = predicts.detach()
+        np.savetxt("mlops/bin/predictions.csv", predicts.numpy(), delimiter=",")
 
     def save_checkpoint(self):
         val_accuracy = self.metrics["accuracy"]
