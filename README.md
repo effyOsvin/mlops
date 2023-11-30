@@ -12,7 +12,6 @@ We solve the problem of image classification using a dataset
 poetry install
 pre-commit install
 pre-commit run -a
-
 ```
 
 ### Run experiments
