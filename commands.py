@@ -1,10 +1,14 @@
 import torch
-from common.data_prep import test_data, valid_data
-from common.runner import CNNRunner
+
+from mlops.common.data_prep import test_data, valid_data
+from mlops.common.runner import CNNRunner
+from mlops.common.train_model import train_model
 
 
 def main():
     ckpt_name_cnn = "./mlops/bin/model_cnn.ckpt"
+    train_model(ckpt_name_cnn)
+
     best_model_cnn = None
     with open(ckpt_name_cnn, "rb") as f:
         best_model_cnn = torch.load(f)
