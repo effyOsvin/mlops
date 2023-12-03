@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+['remote "myremote"']
+=======
 [core]
     remote = storage
 ['remote "storage"']
+>>>>>>> main
     url = gdrive://13nYUCOmNorLC21vhPA-ROW4iAU1shBlI
