@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-['remote "myremote"']
-=======
 [core]
     remote = storage
+    hardlink_lock = true
 ['remote "storage"']
->>>>>>> main
-    url = gdrive://13nYUCOmNorLC21vhPA-ROW4iAU1shBlI
+    url = gdrive://1eqHpoFzVaHOcY9x89fW6gIKM-xsBzV1P

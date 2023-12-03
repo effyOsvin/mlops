@@ -1,7 +1,6 @@
 import fire
-
-from mlops.infer import Infer
-from mlops.train import Train
+from infer import Infer
+from train import Train
 
 
 def train(
