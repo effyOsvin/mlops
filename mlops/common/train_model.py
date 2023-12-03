@@ -3,7 +3,7 @@ import os
 import torch
 import torch.nn as nn
 
-from .data_prep import load_data, train_data, valid_data
+from .data_prep import train_data, valid_data
 from .runner import CNNRunner
 
 # Last layer (embeddings) size for CNN models
@@ -12,11 +12,8 @@ EMBEDDING_SIZE = 128
 # Number of classes in the dataset
 NUM_CLASSES = 2
 
-# Number of epochs
-NUM_EPOCHS = 10
-
 # Learning rate
-LR = NUM_EPOCHS
+LR = 0.001
 
 
 class Flatten(nn.Module):
@@ -25,7 +22,7 @@ class Flatten(nn.Module):
         return torch.flatten(x, start_dim=1)
 
 
-def train_model(ckpt_name_cnn):
+def train_model(ckpt_name_cnn, num_epoch):
     model_cnn = nn.Sequential()
     model_cnn.add_module(
         "conv1", nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3)
@@ -65,8 +62,7 @@ def train_model(ckpt_name_cnn):
         os.system("mkdir mlops/bin")
 
     runner_cnn = CNNRunner(model_cnn, opt, device, ckpt_name_cnn)
-    if not os.path.exists("./mlops/data"):
-        load_data()
+
     train_batch_gen = train_data()
     val_batch_gen = valid_data()
-    runner_cnn.train(train_batch_gen, val_batch_gen, n_epochs=NUM_EPOCHS)
+    runner_cnn.train(train_batch_gen, val_batch_gen, n_epochs=num_epoch)
