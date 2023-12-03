@@ -15,13 +15,6 @@ SIZE_W = 96
 BATCH_SIZE = 256
 
 
-def load_data():
-    # Training set with 11K images
-    os.system("wget https://www.dropbox.com/s/gqdo90vhli893e0/data.zip")
-    os.system("unzip -qq data.zip -d mlops/data")
-    os.system("rm data.zip")
-
-
 def data_transformer():
     # Images mean and std channelwise
     image_mean = [0.485, 0.456, 0.406]

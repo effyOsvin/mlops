@@ -20,17 +20,17 @@ pre-commit run -a
 For train the model and save it afterward, run:
 
 ```
-python mlops/train.py
+python mlops/commands.py train
 ```
 
 For infer a model, run:
 
 ```
-python mlops/infer.py
+python mlops/commands.py infer
 ```
 
 For train and infer a resulting model, run:
 
 ```
-python commands.py
+python
 ```
