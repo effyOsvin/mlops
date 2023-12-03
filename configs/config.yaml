@@ -1,0 +1,11 @@
+model:
+  ckpt_name_cnn: "./mlops/bin/model_cnn.ckpt"
+
+common:
+  data_path: r"./mlops/data"
+  size_h: 96
+  size_w: 96
+  batch_size: 256
+  is_mlflow_logging: False
+  mlflow_uri: http://127.0.0.1:5000
+  mlflow_models_path: ./mlflow_models/

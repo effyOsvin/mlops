@@ -1,17 +1,17 @@
 import fire
-from infer import Infer
-from train import Train
+from infer import make_infer
+from train import make_train
 
 
 def train(
     path_to_data: str = "https://www.dropbox.com/s/gqdo90vhli893e0/data.zip",
     num_epoch: int = 10,
 ) -> None:
-    Train().train_model(path_to_data, num_epoch)
+    make_train(path_to_data, num_epoch)
 
 
 def infer() -> None:
-    Infer().make_infer()
+    make_infer()
 
 
 if __name__ == "__main__":

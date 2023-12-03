@@ -19,11 +19,11 @@ pre-commit run -a
 For train the model and save it afterward, run:
 
 ```
-poetry run python mlops/commands.py train
+python mlops/commands.py train
 ```
 
 For infer a model, run:
 
 ```
-poetry run python mlops/commands.py infer
+python mlops/commands.py infer
 ```
